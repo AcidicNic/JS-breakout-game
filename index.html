@@ -17,6 +17,7 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
 var score = 0;
+var lives = 3;
 
 // ball
 var ballRadius = 10;
@@ -126,6 +127,12 @@ function drawScore() {
     ctx.fillText("Score: "+score, 8, 20);
 }
 
+function drawLives() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+}
+
 function randomBallColor() {
     ballColor = "#" + Math.floor(Math.random()*16777215).toString(16);
 }
@@ -157,7 +164,6 @@ function brickCollisionDetection() {
                     if(score == brickRowCount * brickColumnCount) {
                         alert("YOU WIN, CONGRATULATIONS!");
                         document.location.reload();
-                        clearInterval(interval); // Needed for Chrome to end game
                     }
                 }
             }
@@ -180,9 +186,18 @@ function wallCollisionCheck() {
             dy = -dy;
         }
         else {
-            alert("GAME OVER");
-            document.location.reload();
-            clearInterval(interval);
+            lives--;
+            if(!lives) {
+                alert("GAME OVER");
+                document.location.reload();
+            }
+            else {
+                x = canvas.width/2;
+                y = canvas.height-30;
+                dx = 2;
+                dy = -2;
+                paddleX = (canvas.width-paddleWidth)/2;
+            }
         }
     }
 }
@@ -195,6 +210,7 @@ function draw() {
     drawPaddle();
     drawBricks();
     drawScore();
+    drawLives();
 
     wallCollisionCheck();
     brickCollisionDetection();
@@ -204,9 +220,10 @@ function draw() {
     // update coords
     x += dx;
     y += dy;
+    requestAnimationFrame(draw);
 }
 
-var interval = setInterval(draw, 10);
+draw();
 
 </script>
 
