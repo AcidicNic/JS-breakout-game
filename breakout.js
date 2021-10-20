@@ -2,7 +2,7 @@ var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
 var score = 0;
-var lives = 1;
+var lives = 2;
 var textColor = "#3B3B3B";
 var endMsg = "Game Over!";
 var helpMsg = "Press space or enter to restart";
@@ -10,12 +10,13 @@ var helpMsg = "Press space or enter to restart";
 // ball
 var ballRadius = 10;
 var ballColor = "#3B3B3B"
+var ballSpeed = 2;
 // ball coords
 var x = canvas.width/2;
 var y = canvas.height-30;
 // ball speed & direction
-var dx = -2;
-var dy = -2;
+var dx = 2 * (Math.floor(Math.random()*2) || -1);
+var dy = 2 * (Math.floor(Math.random()*2) || -1);
 
 // paddle
 var paddleHeight = 10;
@@ -114,7 +115,7 @@ function drawScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = textColor;
     ctx.textAlign = 'left';
-    ctx.fillText("Score: " + score, 8, 20);
+    ctx.fillText(`Score: ${score} [dx: ${dx}, dy: ${dy}]`, 8, 20);
 }
 
 function drawLives() {
@@ -168,16 +169,18 @@ function brickCollisionCheck() {
 function wallCollisionCheck() {
     if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
         dx = -dx;
+        randomSlope();
     }
     else if (y + dy < ballRadius) {
         dy = -dy;
+        randomSlope();
     }
     else if (y + dy > canvas.height - ballRadius) {
         lives--;
         x = canvas.width / 2;
         y = canvas.height - 30;
-        dx = 2;
-        dy = -2;
+        dx = 2 * (Math.floor(Math.random()*2) || -1);
+        dy = 2 * (Math.floor(Math.random()*2) || -1);
         paddleX = (canvas.width - paddleWidth) / 2;
     }
 }
@@ -185,9 +188,16 @@ function wallCollisionCheck() {
 function paddleCollisionCheck() {
     if (y > canvas.height - ballRadius - paddleHeight) {
         if (x > paddleX && x < paddleX + paddleWidth) {
+            ballSpeed += .1;
             dy = -dy;
+            randomSlope();
         }
     }
+}
+
+function randomSlope() {
+    dy = (ballSpeed + ((Math.random() - .5) / 2)) * Math.sign(dy);
+    dx = (ballSpeed + ((Math.random() - .5) / 2)) * Math.sign(dx);
 }
 
 function drawBackground() {
