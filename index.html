@@ -16,6 +16,8 @@
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 
+var score = 0;
+
 // ball
 var ballRadius = 10;
 var ballColor = "#0095DD"
@@ -110,6 +112,12 @@ function drawBricks() {
     }
 }
 
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: "+score, 8, 20);
+}
+
 function randomBallColor() {
     ballColor = "#" + Math.floor(Math.random()*16777215).toString(16);
 }
@@ -137,6 +145,12 @@ function brickCollisionDetection() {
                 if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
                     dy = -dy;
                     b.status = 0;
+                    score++;
+                    if(score == brickRowCount * brickColumnCount) {
+                        alert("YOU WIN, CONGRATULATIONS!");
+                        document.location.reload();
+                        clearInterval(interval); // Needed for Chrome to end game
+                    }
                 }
             }
         }
@@ -172,6 +186,7 @@ function draw() {
     drawBall();
     drawPaddle();
     drawBricks();
+    drawScore();
 
     wallCollisionCheck();
     brickCollisionDetection();
