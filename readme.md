@@ -1,1 +1,1 @@
-# [JavaScript Breakout Game](nicc.io/JS-breakout-game)
+# [JavaScript Breakout Game](https://nicc.io/JS-breakout-game)
