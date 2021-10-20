@@ -37,6 +37,7 @@ var rightPressed = false;
 var leftPressed = false;
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
         rightPressed = true;
@@ -45,6 +46,7 @@ function keyDownHandler(e) {
         leftPressed = true;
     }
 }
+
 function keyUpHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
         rightPressed = false;
@@ -94,9 +96,20 @@ function wallCollisionCheck() {
         randomBallColor()
         dx = -dx;
     }
-    else if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+    else if(y + dy < ballRadius) {
         randomBallColor()
         dy = -dy;
+    }
+    else if(y + dy > canvas.height-ballRadius) {
+        if(x > paddleX && x < paddleX + paddleWidth) {
+            randomBallColor()
+            dy = -dy;
+        }
+        else {
+            alert("GAME OVER");
+            document.location.reload();
+            clearInterval(interval);
+        }
     }
 }
 
@@ -108,7 +121,7 @@ function draw() {
     drawPaddle();
 
     wallCollisionCheck();
-    
+
     controlPaddle();
 
     // update coords
@@ -116,7 +129,7 @@ function draw() {
     y += dy;
 }
 
-setInterval(draw, 10);
+var interval = setInterval(draw, 10);
 
 </script>
 
