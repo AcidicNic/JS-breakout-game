@@ -115,14 +115,14 @@ function drawScore() {
     ctx.font = "16px Arial";
     ctx.fillStyle = textColor;
     ctx.textAlign = 'left';
-    ctx.fillText(`Score: ${score} [dx: ${dx}, dy: ${dy}]`, 8, 20);
+    ctx.fillText(`Score: ${score}`, 8, 20);
 }
 
 function drawLives() {
     ctx.font = "16px Arial";
     ctx.fillStyle = textColor;
     ctx.textAlign = 'right';
-    ctx.fillText("Lives: " + lives, canvas.width - 8, 20);
+    ctx.fillText(`Lives: ${lives}`, canvas.width - 8, 20);
 }
 
 function randomBallColor() {
