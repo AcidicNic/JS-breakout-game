@@ -8,7 +8,7 @@ var endMsg = "Game Over!";
 var helpMsg = "Press space or enter to restart";
 
 // ball
-var ballRadius = 10;
+var ballRadius = 7;
 var ballColor = "#3B3B3B"
 var ballSpeed = 2;
 // ball coords
@@ -179,8 +179,10 @@ function wallCollisionCheck() {
         lives--;
         x = canvas.width / 2;
         y = canvas.height - 30;
-        dx = 2 * (Math.floor(Math.random()*2) || -1);
-        dy = 2 * (Math.floor(Math.random()*2) || -1);
+        ballSpeed = 2
+        randomSlope();
+        dx *= (Math.floor(Math.random() * 2) || -1);
+        dy *= (Math.floor(Math.random() * 2) || -1);
         paddleX = (canvas.width - paddleWidth) / 2;
     }
 }
