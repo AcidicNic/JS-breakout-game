@@ -16,4 +16,4 @@ class Sprite {
   }
 }
 
-export { Sprite };
+export default Sprite;

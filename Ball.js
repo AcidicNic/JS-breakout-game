@@ -1,12 +1,12 @@
-import { Sprite } from './Sprite.js';
+import Sprite from './Sprite.js';
 
 class Ball extends Sprite {
-  constructor(x = 0, y = 0, radius = 7, speed = 3.5, color = '#3B3B3B') {
+  constructor(x = 0, y = 0, radius = 7, speed = 3, color = '#3B3B3B') {
     super(x, y, 0, 0, color);
     this.r = radius;
     this.speed = speed;
     this.dx = speed * (Math.floor(Math.random() * 2) || -1);
-    this.dy = speed * (Math.floor(Math.random() * 2) || -1);
+    this.dy = -speed;
   }
 
   render(ctx) {
@@ -18,8 +18,8 @@ class Ball extends Sprite {
   }
 
   incrementSpeed() {
-    if (this.speed < 7) {
-      this.speed += .25;
+    if (this.speed < 6) {
+      this.speed += .2;
     }
   }
 
@@ -29,9 +29,9 @@ class Ball extends Sprite {
   }
 
   randomSlope() {
-    this.dy = (this.speed + ((Math.random() - 0.5) / 2)) * Math.sign(this.dy);
-    this.dx = (this.speed + ((Math.random() - 0.5) / 2)) * Math.sign(this.dx);
+    this.dx = (this.speed + (Math.random() * 2 - 1)) * Math.sign(this.dx);
+    this.dy = (this.speed + (Math.random() * 2 - 1)) * Math.sign(this.dy);
   }
 }
 
-export { Ball };
+export default Ball;

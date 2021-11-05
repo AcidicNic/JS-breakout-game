@@ -1,7 +1,7 @@
-import { Sprite } from './Sprite.js';
+import Sprite from './Sprite.js';
 
 class Text extends Sprite {
-  constructor(text, x, y, font = '16px Arial', align = 'left', color = '#3B3B3B') {
+  constructor(text, x, y, align = 'center', font = '16px Arial', color = '#3B3B3B') {
     super(x, y, 0, 0, color);
     this.font = font;
     this.align = align;
@@ -16,4 +16,4 @@ class Text extends Sprite {
   }
 }
 
-export { Text };
+export default Text;
