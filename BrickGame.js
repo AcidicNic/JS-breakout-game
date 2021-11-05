@@ -5,9 +5,9 @@ import Text from './Text.js';
 import Score from './Score.js';
 import Lives from './Lives.js';
 
-class BreakoutGame {
+class BrickGame {
   constructor(
-    canvasId = 'breakoutGame',
+    canvasId = 'brickGame',
     lives = 2,
     backgroundColors = ['#FFCCCC', '#FEFFBF', '#C0FFBF', '#BFFDFF', '#E4BFFF'],
 
@@ -210,7 +210,7 @@ class BreakoutGame {
   }
 }
 
-export default BreakoutGame;
+export default BrickGame;
 
 // *~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~* //
 

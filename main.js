@@ -1,5 +1,5 @@
-import BreakoutGame from './BreakoutGame.js';
+import BrickGame from './BrickGame.js';
 
-const game = new BreakoutGame();
+const game = new BrickGame();
 
 game.start();
